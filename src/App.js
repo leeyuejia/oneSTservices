@@ -1,24 +1,34 @@
 import logo from './logo.svg';
 import './App.css';
+import { Fragment } from 'react'
+import { Switch, Route } from 'react-router-dom';
+import { MDBContainer, MDBInput } from 'mdbreact'
+import { BrowserRouter as Router } from 'react-router-dom';
+import Mainmenu from './components/commons/menu';
+import UenValidator from './components/views/uenValidator';
+import WeatherForecast from './components/views/weatherForecast';
+
+const ServiceOne = () => {
+  return (
+    <MDBContainer>
+      <MDBInput>
+        uen number here
+      </MDBInput>
+    </MDBContainer>
+  )
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment className="App">
+      <Router>
+        <Mainmenu/>
+        <Switch>
+          <Route path='/uenValidator' component={UenValidator}/>
+          <Route path='/weatherForecast' component={WeatherForecast}/>
+        </Switch>
+      </Router>
+    </Fragment>
   );
 }
 

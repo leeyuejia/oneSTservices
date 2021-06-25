@@ -1,0 +1,11 @@
+.invalid-Weather-container {
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+    /* margin-left: 6%; */
+    }
+
+.container {
+    width: 35% !important;
+}
