@@ -48,6 +48,7 @@ function WeatherForecast(props) {
             fetchForeCast()
         } else {
             setErr(true)
+            setErrMsg("Please choose a valid selection.")
         }
         
     }

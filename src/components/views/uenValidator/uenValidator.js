@@ -22,7 +22,6 @@ function UenValidator(props) {
         if (!uen) {
             await setUenErrMsg("Please enter a valid UEN.")
             await setUenErr(true)
-            console.log(uenErrMsg)
         } else if(uen) {
             await validateUen(uen)
         } else {
@@ -36,7 +35,6 @@ function UenValidator(props) {
                             'GB', 'DP', 'CP', 'NR', 'CM', 'CD', 'MD', 'HS', 'VH', 'CH', 'MH', 'CL', 'XL', 'CX',
                             'RP', 'TU', 'TC', 'FB', 'FN', 'PA', 'PB', 'SS', 'MC', 'SM'
         ];
-        const entityMatch = true
         const inputCap = input.toUpperCase()
         const inputLength = input.length
         const inputArr = input.split('')
