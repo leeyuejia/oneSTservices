@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard } from 'mdbreact';
-import apis from '../../services/api';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard } from 'mdbreact';
 import Axios from 'axios'
-import Moment from 'react-moment';
 import moment from 'moment';
 import './style_module.css'
 const https = require('https')
@@ -30,12 +28,9 @@ function WeatherForecast(props) {
     const url = "https://api.data.gov.sg/v1/environment/2-hour-weather-forecast"
 
     const fetchApi = async () => {
-        
         try {
             const fetchData = await api.get(url)
             const result = await fetchData.data
-            // const result = fetchData.data
-
             await setLocationList(result.area_metadata)
             console.log(typeof result.area_metadata)
             console.log(result.area_metadata.length)
@@ -49,7 +44,12 @@ function WeatherForecast(props) {
         setShowResult(false)
         setErr(false)
         console.log(selectLoc)
-        fetchForeCast()
+        if(selectLoc) {
+            fetchForeCast()
+        } else {
+            setErr(true)
+        }
+        
     }
     const fetchForeCast = async e => {
         //https://api.data.gov.sg/v1/environment/2-hour-weather-forecast?date_time=2021-06-25T14%3A00%3A00
@@ -59,28 +59,22 @@ function WeatherForecast(props) {
             const postUrl = `${url}?${param}=${currDate}`
             const fetchData = await api.get(postUrl)
             const fetchResult = await fetchData.data.items[0]
-            console.log(fetchResult)
             const itemList = await fetchResult.forecasts
-            console.log(itemList)
-            const selResult = itemList.filter(each => each.area == selectLoc)
-            console.log(selectLoc + " and ", selResult[0])
-            if(selResult) {
+            const selResult = itemList.filter(each => each.area === selectLoc)
+            if(selResult[0]) {
                 setResult(selResult[0])
                 setErr(false)
                 setShowResult(true)
+            } else {
+                setErr(true)
+                setShowResult(false)
             }
         } catch(e) {
-            console.log("something went wrong", e)
             setErr(true)
             setShowResult(false)
         }
     }
-    const selectChange = e => {
-        e.preventDefault()
-        console.log(e)
-    }
     const handleLocationChange = (e)  =>{
-        console.log(e.target.value)
         e.preventDefault()
         setSelectLoc(e.target.value)
     }
@@ -95,9 +89,9 @@ function WeatherForecast(props) {
                 <MDBCol>
                 <MDBCard className="p-3">
                     <form onSubmit = {submit} noValidate>
-                        <p className="h5 text-center mb-4">Singapore 2hour weather forecast</p>
+                        <p className="h5 text-center mb-4">Singapore weather forecast for the next 2 hours</p>
                         
-                        <select className="browser-default custom-select" value={selectLoc} onChange={handleLocationChange} >
+                        <select className="browser-default custom-select" value={selectLoc} onChange={handleLocationChange}>
                             <option >Choose your option</option>
                             {locationList?
                             locationList.map( item => {

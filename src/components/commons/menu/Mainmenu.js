@@ -1,5 +1,5 @@
 import React from 'react';
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBIcon } from 'mdbreact';
+import { MDBContainer, MDBBtn, MDBIcon } from 'mdbreact';
 import { useHistory } from 'react-router';
 
 
@@ -14,12 +14,12 @@ function Mainmenu(props) {
         <MDBContainer className="container p-3 d-flex flex-row justify-content-around">
             <MDBBtn 
                 onClick={(e) => navTo(e,"uenValidator")}>
-                    <MDBIcon fas icon="home mr-2"/>
+                    <MDBIcon fas icon="check-double mr-2"/>
                     uenValidator
             </MDBBtn>
             <MDBBtn 
                 onClick={(e) => navTo(e,"weatherForecast")}>
-                    <MDBIcon fas icon="home mr-2"/>
+                    <MDBIcon fas icon="cloud-moon-rain mr-2"/>
                     Weather Forecast
             </MDBBtn>
         </MDBContainer>
